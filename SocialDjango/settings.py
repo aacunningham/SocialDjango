@@ -36,7 +36,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
     'userProfile',
+    'SNUser',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,4 +85,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
+
+AUTH_USER_MODEL = 'SNUser.SNUser'

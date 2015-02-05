@@ -1,0 +1,26 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Create a New User!</title>
+        {% bootstrap_css %}
+	</head>
+	<body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <form id="user_form" action="{% url 'new_user' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form user_form %}
+                        {% bootstrap_form profile_form %}
+                        {% buttons %}
+                            <button class="btn btn-primary" type="submit">Submit!</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+	</body>
+</html>
