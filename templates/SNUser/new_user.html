@@ -14,7 +14,6 @@
                     <form id="user_form" action="{% url 'new_user' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% bootstrap_form user_form %}
-                        {% bootstrap_form profile_form %}
                         {% buttons %}
                             <button class="btn btn-primary" type="submit">Submit!</button>
                         {% endbuttons %}
