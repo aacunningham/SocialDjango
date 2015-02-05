@@ -6,16 +6,27 @@
 		<meta charset="UTF-8">
 		<title>Create a New User!</title>
         {% bootstrap_css %}
+        {% bootstrap_javascript jquery=1 %}
 	</head>
-	<body>
+	<body style="padding-top:70px">
+    {% include "navbar.html" %}
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
                     <form id="user_form" action="{% url 'new_user' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% bootstrap_form user_form %}
+                        {% bootstrap_form_errors user_form %}
+                        {% for field in user_form %}
+                            {% if field.label == "First name" %}
+                            <div class="col-xs-5">{% bootstrap_field field %}</div>
+                            {% elif field.label == "Last name" %}
+                            <div class="col-xs-7">{% bootstrap_field field %}</div>
+                            {% else %}
+                            <div class="col-xs-12">{% bootstrap_field field %}</div>
+                            {% endif %}
+                        {% endfor %}
                         {% buttons %}
-                            <button class="btn btn-primary" type="submit">Submit!</button>
+                        <div class="col-xs-12"><button class="btn btn-primary" type="submit">Submit!</button></div>
                         {% endbuttons %}
                     </form>
                 </div>

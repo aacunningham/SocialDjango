@@ -18,6 +18,8 @@ def new_user(request):
             user.set_password(user.password)
             user.save()
             registered = True
+            user = authenticate(username=request.POST['email'], password=request.POST['password'])
+            login(request, user)
         else:
             print user_form.errors
     else:
