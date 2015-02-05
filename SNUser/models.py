@@ -30,11 +30,12 @@ class SNUserManager(BaseUserManager):
             last_name=last_name,
         )
         user.is_staff = True;
+        user.is_superuser = True;
         user.save(using=self._db)
         return user
 
 
-class SNUser(AbstractBaseUser):
+class SNUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), max_length=255, unique=True)
     first_name = models.CharField(_('first name'), max_length=30)
     last_name = models.CharField(_('last name'), max_length=30)

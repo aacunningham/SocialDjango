@@ -36,8 +36,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = SNUser
-        fields = ('email', 'password', 'first_name', 'last_name',
-                  'is_active', 'is_staff')
+        fields = '__all__'
 
     def clean_password(self):
         return self.initial["password"]
@@ -52,7 +51,8 @@ class SNUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name')}),
-        ('Permissions', {'fields': ('is_staff',)}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 
+                         'groups', 'user_permissions')}),
     )
     
     add_fieldsets = (
@@ -63,7 +63,7 @@ class SNUserAdmin(UserAdmin):
     )
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email', 'first_name', 'last_name', 'is_staff')
-    filter_horizontal = ()
+    filter_horizontal = ('groups', 'user_permissions')
 
 
 
