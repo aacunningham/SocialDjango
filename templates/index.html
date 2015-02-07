@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>The Social Network</title>
-	</head>
-	<body>
-        <a href="{% url 'new_user' %}">Create New User!</a>
-	</body>
-</html>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="row">
+    <div class="jumbotron">
+        <h1 class="text-center">The Social Network</h1>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'login_page' %}" class="btn btn-primary">Login</a>
+        <a href="{% url 'new_user' %}" class="btn btn-primary">Create a New User</a>
+    </div>
+</div>
+{% endblock %}

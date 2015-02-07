@@ -1,0 +1,17 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <title>The Social Network - {% block title_block %}Django Test Project{% endblock %}</title>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery=1 %}
+        {% block head_block %}{% endblock %}
+	</head>
+	<body>
+    {% include "navbar.html" %}
+        <div class="container">
+            {% block body_block %}{% endblock %}
+        </div>
+	</body>
+</html>

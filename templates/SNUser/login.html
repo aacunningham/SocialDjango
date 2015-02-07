@@ -1,0 +1,29 @@
+{% load staticfiles %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>The Social Network - Login</title>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery=1 %}
+	</head>
+	<body>
+		<div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    <form id="auth_form" action="{% url 'login_page' %}" method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form_errors form %}
+                        {% for field in form %}
+                            {% bootstrap_field field %}
+                        {% endfor %}
+                        {% buttons %}
+                        <div class="text-center"><button class="btn btn-primary" type="submit">Login</button></div>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+	</body>
+</html>

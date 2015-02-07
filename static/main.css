@@ -1,0 +1,52 @@
+body{
+    padding-top: 20px;
+}
+
+.jumbotron h1{
+    color: #DF691A;
+    font-size: 100px;
+}
+
+.container{
+    width: 100%;
+}
+
+a.form-helper {
+    position: absolute;
+    top: 8px;
+    right: 90px;
+    font-size: 17px;
+    color: #6464a0;
+}
+
+a.btn.btn-primary {
+    font-size: 40px;
+}
+
+.space-10{
+    height: 20px;
+    width: 100%;
+}
+
+.post-style{
+    border-style: solid;
+    border-width: 5px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border-color: #DF691A;
+}
+
+.post-delete{
+    position: absolute;
+    right:  10px;
+    top:    7px;
+    color:  #FFFFFF;
+}
+
+.post-delete:hover{
+    color: #FF0000
+}
+
+.post-style h3{
+    margin-top: 10px;
+}
