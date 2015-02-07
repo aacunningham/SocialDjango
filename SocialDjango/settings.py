@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'SNUser',
+    'Posts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,6 +89,15 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
 
 AUTH_USER_MODEL = 'SNUser.SNUser'
+
+
+# Django-Bootstrap3 Settings
+
+BOOTSTRAP3 = {
+    'css_url': '/static/bootstrap.min.css',
+}

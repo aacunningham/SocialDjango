@@ -1,14 +1,13 @@
-from django.forms import (
-    CharField, ModelForm, PasswordInput, ValidationError)
+from django import forms
 from SNUser.models import SNUser
 
-class SNUserForm(ModelForm):
-    confirm_password = CharField(label='Confirm Password', widget=PasswordInput(), required=True)
+class SNUserForm(forms.ModelForm):
+    confirm_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(), required=True)
 
     class Meta:
         model = SNUser
         fields = ('first_name', 'last_name', 'email', 'password')
-        widgets = {'password': PasswordInput()}
+        widgets = {'password': forms.PasswordInput()}
 
     def clean(self):
         cleaned_data = super(SNUserForm, self).clean()
@@ -19,3 +18,8 @@ class SNUserForm(ModelForm):
             self.add_error('confirm_password', '')
             self.add_error('password', '')
             raise error
+
+
+class SNUserLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.IPAddressField()
