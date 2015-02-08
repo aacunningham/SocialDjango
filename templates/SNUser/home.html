@@ -5,18 +5,37 @@
 {% block head_block %}
 <link rel="stylesheet" href="{% static 'main.css' %}">
 {% endblock %}
+{% block modal_block %}
+<div id="deletePost" class="modal" tabindex="-1" role="dialog" aria-labelledby="deletePostLabel" aria-hidden="true">
+	<div class="model-dialog">
+		<div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 id="deletePostLabel" class="modal-title">Delete Post?</h4>
+            </div>
+            <div class="modal-body">
+            	<p>This is some sample text?!</p>
+            </div>
+        </div>
+	</div>
+</div>
+{% endblock %}
 {% block body_block %}
 <h1>{{ user.get_full_name }}</h1>
-<h1>{{ reg }}</h1>
 <div class="row">
     <div class="row space-10"></div>
     <div class="col-xs-5 col-xs-offset-1">
         {% if posts %}
         {% for post in posts %}
-        <div class="row post-style">
-            <a href="{% url 'delete_post' post.id %}" class="post-delete">{% bootstrap_icon 'remove' %}</a>
-            <h3>{{ post.owner.get_full_name }}</h3>
-            <p>{{ post.body }}{{ post.id }}</p>
+        <div class="panel panel-primary" id="post{{ post.id }}">
+            <div class="panel-heading">
+                <button type="button" class="close post-delete deletePost" data-postId="{{ post.id }}">{% bootstrap_icon 'remove' %}</button>
+                <h3 class="panel-title">{{ post.owner.get_full_name }}</h3>
+                <h5 class="panel-subtitle">{{ post.time|date:"DATETIME_FORMAT" }}</h5>
+            </div>
+            <div class="panel-body">
+                <p>{{ post.body }}</p>
+            </div>
         </div>
         {% endfor %}
         {% else %}
@@ -37,4 +56,14 @@
         </form>
     </div>
 </div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+$('.deletePost').click(function(){
+    var postId;
+    postId = $(this).attr("data-postId");
+    $.get('{% url "delete_post" %}', {'post_id': postId}, function(data){});
+        $(this).parent().parent().remove();
+});
+</script>
 {% endblock %}

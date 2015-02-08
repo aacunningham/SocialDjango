@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -65,9 +66,15 @@ def home_page(request):
     return render(request, 'SNUser/home.html', {'form': post_form, 'posts': posts})
 
 
-def delete_post(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+def delete_post(request):
+    success = False
+    post = Post()
+    if request.method == 'GET':
+        post_id = request.GET.get('post_id')
+        post = get_object_or_404(Post, pk=post_id)
     user = request.user
     if post.owner != user:
         return redirect('home_page')
-    return render(request, 'SNUser/delete_post.html', {'post': post,})
+    if post.delete():
+        success = True
+    return HttpResponse(success)

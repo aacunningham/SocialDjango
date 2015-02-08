@@ -53,7 +53,9 @@ class SNUserAdmin(UserAdmin):
         ('Personal info', {'fields': ('first_name', 'last_name')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 
                          'groups', 'user_permissions')}),
+        ('Times', {'fields': ('last_login', 'date_joined')}),
     )
+    readonly_fields = ['last_login', 'date_joined']
     
     add_fieldsets = (
         (None, {

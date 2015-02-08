@@ -9,9 +9,11 @@
         {% block head_block %}{% endblock %}
 	</head>
 	<body>
+    {% block modal_block %}{% endblock %}
     {% include "navbar.html" %}
         <div class="container">
             {% block body_block %}{% endblock %}
         </div>
+        {% block javascript %}{% endblock %}
 	</body>
 </html>

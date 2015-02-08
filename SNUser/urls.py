@@ -6,5 +6,5 @@ urlpatterns = patterns('',
     url(r'^new_user/$', views.new_user, name='new_user'),
     url(r'^login/$', views.login_page, name='login_page'),
     url(r'^home/$', views.home_page, name='home_page'),
-    url(r'^post/(?P<post_id>\d+)/delete/?$', views.delete_post, name='delete_post'),
+    url(r'^post/delete/?$', views.delete_post, name='delete_post'),
 )
