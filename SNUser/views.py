@@ -1,8 +1,8 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponse
 from SNUser.models import SNUser
 from SNUser.forms import SNUserForm, SNUserLoginForm
 from Posts.models import Post
@@ -43,6 +43,8 @@ def new_user(request):
     return render(request, 'SNUser/new_user.html', {'user_form': user_form,})
 
 def login_page(request):
+    if request.user.is_authenticated():
+        return redirect('home_page')
     if request.method == 'POST':
         auth_form = AuthenticationForm(request, data=request.POST)
         if auth_form.is_valid():
@@ -51,6 +53,11 @@ def login_page(request):
     else:
         auth_form = AuthenticationForm(request)
     return render(request, 'SNUser/login.html', {'form': auth_form,})
+
+@login_required
+def logout_page(request):
+    logout(request)
+    return redirect('index')
 
 @login_required
 def home_page(request):
@@ -67,14 +74,14 @@ def home_page(request):
 
 
 def delete_post(request):
-    success = False
-    post = Post()
+    user = request.user
     if request.method == 'GET':
         post_id = request.GET.get('post_id')
         post = get_object_or_404(Post, pk=post_id)
-    user = request.user
-    if post.owner != user:
-        return redirect('home_page')
-    if post.delete():
-        success = True
-    return HttpResponse(success)
+        if post.owner != user:
+            return redirect('home_page')
+        post.delete()
+    response = "success"
+    if not user.post_set.all():
+        response = "<p>There are no posts related to yours.</p>"
+    return HttpResponse(response)
