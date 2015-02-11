@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from SNUser.models import SNUser
-from SNUser.forms import SNUserForm, SNUserLoginForm
+from SNUser.forms import SNUserForm
 from Posts.models import Post
 from Posts.forms import PostForm
 
@@ -29,12 +29,9 @@ def index(request):
 
 def new_user(request):
     if request.method == 'POST':
-        user_form = SNUserForm(data=request.POST)
+        user_form = SNUserForm(request.POST, request.FILES)
         if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            user = authenticate(username=request.POST['email'], password=request.POST['password'])
+            user = SNUser.objects.create_user(**user_form.cleaned_data)
             login(request, user)
         else:
             print user_form.errors

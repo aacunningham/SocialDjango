@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'haystack',
     'SNUser',
     'Posts',
 )
@@ -79,6 +80,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Email Settings
+
+EMAIL_HOST = 'smtp-mail.outlook.com'
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'aa.cunningham@outlook.com'
+
+EMAIL_HOST_PASSWORD = 'not my real password'
+
+EMAIL_USE_TLS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -93,6 +105,14 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = '/media/'
+
+MEDIA_DIRS = (
+    os.path.join(BASE_DIR, 'media'),
+)
+
 AUTH_USER_MODEL = 'SNUser.SNUser'
 
 
@@ -100,4 +120,14 @@ AUTH_USER_MODEL = 'SNUser.SNUser'
 
 BOOTSTRAP3 = {
     'css_url': '/static/bootstrap.min.css',
+}
+
+
+# Django-Haystack Settings
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr',
+    },
 }

@@ -6,7 +6,7 @@ class SNUserForm(forms.ModelForm):
 
     class Meta:
         model = SNUser
-        fields = ('first_name', 'last_name', 'email', 'password')
+        fields = ('first_name', 'last_name', 'email', 'profile_image', 'password')
         widgets = {'password': forms.PasswordInput()}
 
     def clean(self):
@@ -18,8 +18,3 @@ class SNUserForm(forms.ModelForm):
             self.add_error('confirm_password', '')
             self.add_error('password', '')
             raise error
-
-
-class SNUserLoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.IPAddressField()

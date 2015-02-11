@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
 )
@@ -8,7 +9,7 @@ from django.utils import timezone
 # Create your models here.
 
 class SNUserManager(BaseUserManager):
-    def create_user(self, email, password, first_name, last_name):
+    def create_user(self, email, password, confirm_password, profile_image, first_name, last_name):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -17,9 +18,15 @@ class SNUserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
         )
+        
+        if password == confirm_password:
+            user.set_password(password)
 
-        user.set_password(password)
+        user.profile_image = profile_image
+
         user.save(using=self._db)
+
+        user = authenticate(username=email, password=password)
         return user
 
     def create_superuser(self, email, password, first_name, last_name):
@@ -39,6 +46,7 @@ class SNUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), max_length=255, unique=True)
     first_name = models.CharField(_('first name'), max_length=30)
     last_name = models.CharField(_('last name'), max_length=30)
+    profile_image = models.ImageField(upload_to='profile_images', null=True, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
                     'site.'))
