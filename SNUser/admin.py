@@ -50,7 +50,7 @@ class SNUserAdmin(UserAdmin):
     list_filter = ('is_staff',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'profile_image',)}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 
                          'groups', 'user_permissions')}),
         ('Times', {'fields': ('last_login', 'date_joined')}),

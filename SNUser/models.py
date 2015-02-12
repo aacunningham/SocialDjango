@@ -5,6 +5,8 @@ from django.contrib.auth.models import (
 )
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+import uuid
+import os
 
 # Create your models here.
 
@@ -42,11 +44,16 @@ class SNUserManager(BaseUserManager):
         return user
 
 
+def get_file_path(instance, filename):
+    file_ext = filename.split('.')[-1]
+    filename = "%s.%s" % (uuid.uuid4(), file_ext)
+    return os.path.join('profile_image', filename)
+
 class SNUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), max_length=255, unique=True)
     first_name = models.CharField(_('first name'), max_length=30)
     last_name = models.CharField(_('last name'), max_length=30)
-    profile_image = models.ImageField(upload_to='profile_images', null=True, blank=True)
+    profile_image = models.ImageField(upload_to=get_file_path, null=True, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
         help_text=_('Designates whether the user can log into this admin '
                     'site.'))

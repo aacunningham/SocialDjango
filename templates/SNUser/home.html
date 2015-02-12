@@ -22,7 +22,9 @@
 {% endblock %}
 {% block body_block %}
 <h1>{{ user.get_full_name }}</h1>
-<img src="{{ user.profile_image.url }}" width=110 height=70>
+{% if user.profile_image %}
+<img src="{{ user.profile_image.url }}" style="max-width:100px;max-heigth:100px;">
+{% endif %}
 <div class="row">
     <div class="row space-10"></div>
     <div id="post_column" class="col-xs-5 col-xs-offset-1">
