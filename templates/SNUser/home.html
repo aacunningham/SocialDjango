@@ -46,7 +46,7 @@
         {% endif %}
     </div>
     <div class="col-xs-4 col-xs-offset-1">
-        <form id="post_form" action="{% url 'home_page' %}" method="POST">
+        <form id="post_form" action="{% url 'create_post' %}" method="POST">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
@@ -76,5 +76,14 @@ $('.deletePost').click(function(){
             });
     });
 });
+$('#post_form').on('submit', function(event){
+    event.preventDefault();
+    var post_data = $('#id_body').val();
+    var csrf_token = $("input[name='csrfmiddlewaretoken']").val()
+    $.post('{% url "create_post" %}', {'body': post_data, 'csrfmiddlewaretoken': csrf_token}, function(data){
+        $('#post_column').prepend(data);
+        data.hide().prependTo('#post_column').slideDown("slow");
+        });
+    });
 </script>
 {% endblock %}

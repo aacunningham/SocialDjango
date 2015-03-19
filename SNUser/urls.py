@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^logout/$', views.logout_page, name='logout_page'),
     url(r'^home/$', views.home_page, name='home_page'),
     url(r'^post/delete/?$', views.delete_post, name='delete_post'),
+    url(r'^post/create/?$', views.create_post, name='create_post'),
 )

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.template.loader import render_to_string
 from django.http import HttpResponse
 from SNUser.models import SNUser
 from SNUser.forms import SNUserForm
@@ -58,15 +59,8 @@ def logout_page(request):
 
 @login_required
 def home_page(request):
-    user = request.user
-    if request.method == 'POST':
-        post_form = PostForm(data=request.POST)
-        if post_form.is_valid():
-            new_post = post_form.save(commit=False)
-            new_post.owner = user
-            new_post.save()
     post_form = PostForm()
-    posts = user.post_set.all().order_by('-time')
+    posts = request.user.post_set.all().order_by('-time')
     return render(request, 'SNUser/home.html', {'form': post_form, 'posts': posts})
 
 
@@ -82,3 +76,15 @@ def delete_post(request):
     if not user.post_set.all():
         response = "<p>There are no posts related to yours.</p>"
     return HttpResponse(response)
+
+
+def create_post(request):
+    new_post = None
+    user = request.user
+    if request.method == 'POST':
+        post_form = PostForm(data=request.POST)
+        if post_form.is_valid():
+            new_post = post_form.save(commit=False)
+            new_post.owner = user
+            new_post.save()
+    return redirect('home_page')

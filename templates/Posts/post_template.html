@@ -1,0 +1,11 @@
+{% load bootstrap3 %}
+<div class="panel panel-primary" id="post{{ post.id }}">
+    <div class="panel-heading">
+        <button type="button" class="close post-delete deletePost" data-postId="{{ post.id }}">{% bootstrap_icon 'remove' %}</button>
+        <h3 class="panel-title">{{ post.owner.get_full_name }}</h3>
+        <h5 class="panel-subtitle">{{ post.time|date:"DATETIME_FORMAT" }}</h5>
+    </div>
+    <div class="panel-body">
+        <p>{{ post.body|safe }}</p>
+    </div>
+</div>
