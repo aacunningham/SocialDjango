@@ -9,24 +9,10 @@ from SNUser.forms import SNUserForm
 from Posts.models import Post
 from Posts.forms import PostForm
 
-# Create your views here.
 
 def index(request):
-    registered = False
-    if request.method == 'POST':
-        user_form = SNUserForm(data=request.POST)
-        if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            registered = True
-            user = authenticate(username=request.POST['email'], password=request.POST['password'])
-            login(request, user)
-        else:
-            print user_form.errors
-    else:
-        user_form = SNUserForm()
-    return render(request, 'index.html', {'user_form': user_form, 'registered': registered})
+    return render(request, 'index.html', {})
+
 
 def new_user(request):
     if request.method == 'POST':
@@ -87,4 +73,5 @@ def create_post(request):
             new_post = post_form.save(commit=False)
             new_post.owner = user
             new_post.save()
+            return render(request, "Posts/post_template.html", {"post": new_post})
     return redirect('home_page')

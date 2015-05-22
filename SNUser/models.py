@@ -4,11 +4,9 @@ from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
 )
 from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone
 import uuid
 import os
 
-# Create your models here.
 
 class SNUserManager(BaseUserManager):
     def create_user(self, email, password, confirm_password, profile_image, first_name, last_name):
@@ -35,11 +33,12 @@ class SNUserManager(BaseUserManager):
         user = self.create_user(
             email=email,
             password=password,
+            confirm_password=password,
             first_name=first_name,
             last_name=last_name,
         )
-        user.is_staff = True;
-        user.is_superuser = True;
+        user.is_staff = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -49,23 +48,25 @@ def get_file_path(instance, filename):
     filename = "%s.%s" % (uuid.uuid4(), file_ext)
     return os.path.join('profile_image', filename)
 
+
 class SNUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), max_length=255, unique=True)
     first_name = models.CharField(_('first name'), max_length=30)
     last_name = models.CharField(_('last name'), max_length=30)
     profile_image = models.ImageField(upload_to=get_file_path, null=True, blank=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
-        help_text=_('Designates whether the user can log into this admin '
-                    'site.'))
+                                   help_text=_('Designates whether the user can log into this admin '
+                                               'site.'))
     is_active = models.BooleanField(_('active'), default=True,
-        help_text=_('Designates whether this user should be treated as '
-                    'active. Unselect this instead of deleting accounts.'))
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+                                    help_text=_('Designates whether this user should be treated as '
+                                                'active. Unselect this instead of deleting accounts.'))
+    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+
 
     objects = SNUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name','last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     class Meta:
         verbose_name = _('user')
@@ -80,4 +81,3 @@ class SNUser(AbstractBaseUser, PermissionsMixin):
         
     def __unicode__(self):
         return self.email
-

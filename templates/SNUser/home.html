@@ -30,9 +30,9 @@
     <div id="post_column" class="col-xs-5 col-xs-offset-1">
         {% if posts %}
         {% for post in posts %}
-        <div class="panel panel-primary" id="post{{ post.id }}">
+        <div class="panel panel-primary posts" id="post{{ post.id }}">
             <div class="panel-heading">
-                <button type="button" class="close post-delete deletePost" data-postId="{{ post.id }}">{% bootstrap_icon 'remove' %}</button>
+                <button type="button" class="close post-delete deletePost" data-postId="{{ post.id }}" onclick="delete_post(this)">{% bootstrap_icon 'remove' %}</button>
                 <h3 class="panel-title">{{ post.owner.get_full_name }}</h3>
                 <h5 class="panel-subtitle">{{ post.time|date:"DATETIME_FORMAT" }}</h5>
             </div>
@@ -64,9 +64,9 @@
 <script type="text/javascript">
 $(document).ajaxError(function(event, jqxhr, settings, thrownError){
     alert(thrownError);});
-$('.deletePost').click(function(){
+function delete_post(element){
     var postId;
-    postId = $(this).attr("data-postId");
+    postId = $(element).attr("data-postId");
     $.get('{% url "delete_post" %}', {'post_id': postId}, function(data){
         $('#post'+postId).slideUp("slow", function(){
             $('#post'+postId).remove();
@@ -75,14 +75,17 @@ $('.deletePost').click(function(){
             }
             });
     });
-});
+}
 $('#post_form').on('submit', function(event){
     event.preventDefault();
     var post_data = $('#id_body').val();
     var csrf_token = $("input[name='csrfmiddlewaretoken']").val()
     $.post('{% url "create_post" %}', {'body': post_data, 'csrfmiddlewaretoken': csrf_token}, function(data){
-        $('#post_column').prepend(data);
-        data.hide().prependTo('#post_column').slideDown("slow");
+        var posts = document.getElementsByClassName("posts");
+        if (posts.length == 0) {
+            $('#post_column').html("");
+        }
+        $(data).hide().prependTo('#post_column').slideDown("slow");
         });
     });
 </script>
