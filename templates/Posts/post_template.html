@@ -1,5 +1,5 @@
 {% load bootstrap3 %}
-<div class="panel panel-primary" id="post{{ post.id }}">
+<div class="panel panel-primary posts" id="post{{ post.id }}">
     <div class="panel-heading">
         <button type="button" class="close post-delete deletePost" data-postId="{{ post.id }}" onclick="delete_post(this)">{% bootstrap_icon 'remove' %}</button>
         <h3 class="panel-title">{{ post.owner.get_full_name }}</h3>

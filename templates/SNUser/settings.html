@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% block title_block %}Settings{% endblock %}
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+{% endblock %}
+{% block body_block %}
+<div class="row">
+    <div class="col-xs-offset-4 col-xs-4 text-center">
+        <a href="{% url 'change_bio' %}" style="margin-top: 80px" class="btn btn-warning">Change Bio</a>
+        <a href="{% url 'change_password' %}" style="margin-top: 80px" class="btn btn-warning">Change Password</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-offset-5 col-xs-2 text-center">
+        <button style="margin-top: 80px" type="button" class="btn btn-danger" onclick="are_you_sure()">Delete Account?</button>
+    </div>
+</div>
+<div class="row" id="hidden-form" hidden>
+    <div class="col-xs-12">
+        <p style="text-align: center; margin-top: 50px;">Are you sure? We'll miss you!</p>
+        <p style="text-align: center;">If so, enter your password.</p>
+    </div>
+    <form action="{% url 'settings' %}" method="post">
+        {% csrf_token %}
+        <div class="col-xs-offset-4 col-xs-3">
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+        </div>
+        <div class="col-xs-1">
+            <button type="submit" class="btn btn-warning">Confirm</button>
+        </div>
+    </form>
+</div>
+<script>
+function are_you_sure() {
+    $('#hidden-form').slideToggle();
+}
+</script>
+{% endblock %}

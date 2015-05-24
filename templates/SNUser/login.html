@@ -14,14 +14,14 @@
 		<div class="container">
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
-                    <form id="auth_form" action="{% url 'login_page' %}" method="POST">
+                    <form id="auth_form" action="{% url 'login_page' %}?next={{ next }}" method="POST">
                         {% csrf_token %}
                         {% bootstrap_form_errors form %}
                         {% for field in form %}
                             {% bootstrap_field field %}
                         {% endfor %}
                         {% buttons %}
-                        <div class="text-center"><button class="btn btn-success" type="submit">Login</button></div>
+                        <div class="text-center"><button class="btn btn-success" type="submit">Login</button><a style="margin-left: 5" class="btn btn-warning" href="{% url 'new_user' %}">Sign Up</a></div>
                         {% endbuttons %}
                     </form>
                 </div>

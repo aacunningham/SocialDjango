@@ -12,7 +12,123 @@
     </div>
     <div class="text-center">
         <a href="{% url 'login_page' %}" class="btn btn-success" style="font-size:40px">Login</a>
-        <a href="{% url 'new_user' %}" class="btn btn-primary">Create a New User</a>
+        <a href="{% url 'new_user' %}" class="btn btn-primary">Create an Account!</a>
+    </div>
+</div>
+<div style="margin-top: 30px" class="row">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel" data-slide-to="1"></li>
+                <li data-target="#carousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="{% static 'murica.jpg' %}" alt="Murica">
+                    <div class="carousel-caption">
+                        <h3>Murica</h3>
+                        <p>Land of the free, home of the brave.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'cats-dinner.jpg' %}" alt="Cats">
+                    <div class="carousel-caption">
+                        <h3>It's your birthday!</h3>
+                        <p>Here are some cats eating a cake!</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="{% static 'baby-laptop.jpg' %}" alt="Baby">
+                    <div class="carousel-caption">
+                        <h3>This is me 20 years ago.</h3>
+                        <p>True story, I promise.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px" class="row">
+    <div class="col-xs-12">
+        <h1 class="text-center">This text is mainly filler!</h1>
+    </div>
+    <div class="col-lg-4">
+        <h2>About This Site</h2>
+        <p>This site was built in order to expand my knowledge of Django, a python web framework, as well as demonstrate
+        my skills to those interested. This project broadened my knowledge of web development, stepping me into the
+        MVC (Model, View, Controller) model of web sites, as well as allowing me to work on my javascript and CSS.</p>
+        <p>There are several frameworks/libraries that this project uses to function, several of them being very vital
+        to modern web development and design. The first, as mentioned, is Django, an MVC framework "designed for
+        perfectionists with deadlines". This is a very popular framework for Python, allowing for very quick building
+        and prototyping of web applications, making it easy for someone to create a functional site with little to code.
+        Django is designed to handle the backend of a website, or the server functions, and process url routing,
+        database querying, and template rendering for dynamic websites.</p>
+        <p>While Django handles the backend, though, I needed a framework that could help with frontend. That's where
+        Bootstrap comes in (also known as Twitter Bootstrap). Bootstrap is a CSS framework that helps create websites
+        that beautiful to look at while also being responsive to change. Bootstrap, like many other web frameworks,
+        uses a grid system that allows for content to be responsive to the size of the screen viewing it. While
+        achieving this functionality would be possible without the framework, Bootstrap makes getting a project started
+        a lot faster, allowing me to worry less about design and more on content.</p>
+        <p>Finally, while backend and design are important, interactive sites are what keep people interested, and so
+        I practiced my use of JavaScript, and through it, the common JavaScript library jQuery. With both of these
+        combined, I was able to implement posts on this site that can be added and deleted dynamically, without
+        reloading the full page. This took some time to fully understand, not to mention getting the hang of AJAX
+        requests, but I feel confident that the end result was worth the effort.</p>
+    </div>
+    <div class="col-lg-4">
+        <h2>More About This Site</h2>
+        <p>This site is somewhat functional, though maybe not entirely "social". It allows for people to create a user,
+        create posts on their account, login, logout, and delete their account. Authorized (logged in) users may search
+        for others, and view their profile pages, which includes their post history and their bio. Posts and user bio
+        allow for light html, such as <strong>&#60;strong&#62;</strong> and <em>&#60;em&#62;</em>, and strips out any
+        dangerous code (such as script tags to prevent any javascript injection). There is also the ability to change
+        your password and change your bio. This site should also be easy to view on phones, though it may need some
+        tweaking.</p>
+        <p>Future plans include adding a form of friendship to the site, using M2M modeling. Afterwords, adding comments
+        to posts as well as posting on other peoples pages will be worked into the site. Then, I would like to look into
+        more photos for each user, along the lines of Facebook's photo system. Finally, a way to customize the profile
+        page would be very interesting to look into.</p>
+        <h2>Who Am I?</h2>
+        <p>My name is Aaron Cunningham, and I am a Computer Science major at California State University, Fresno. I
+        have studied for several years in programming, with an emphasis on web development, and will be graduating in
+        the Spring of 2016 with a B.S. in Computer Science, with a minor in Music.</p>
+        <p>While being an avid programmer, I am also very active in the Music Department at Fresno State, serving in an
+        assistant role to the marching band and as a performer for the wind ensembles. I have played the clarinet for
+        the past five years in the Bulldog Marching Band, as well as clarinet and bass clarinet sporadically for the
+        Symphonic Band.</p>
+    </div>
+    <div class="col-lg-4">
+        <h2>Lorem Ipsum</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent augue felis, euismod a consectetur sed,
+        volutpat non turpis. In consequat finibus felis rhoncus imperdiet. In neque ipsum, suscipit non vestibulum a,
+        imperdiet non turpis. Curabitur aliquam velit ut vulputate consectetur. Phasellus dolor turpis, porta vel semper
+        imperdiet, pharetra suscipit mi. Sed convallis varius augue, id posuere sem mollis vehicula. Nunc a tortor at
+        neque varius tincidunt. Fusce fermentum, enim quis dapibus pulvinar, lorem metus pretium dui, eu lobortis sem
+        magna sed quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Fusce tristique facilisis neque, at placerat ligula aliquam porta. Phasellus mollis euismod auctor. Nunc id
+        malesuada nulla, id eleifend erat. Pellentesque eget congue odio, eget mattis nulla. Nunc volutpat a purus vitae
+        viverra. Fusce vitae erat non diam porttitor mattis in vitae quam.</p>
+        <p>Duis in fringilla ligula. Etiam enim neque, consequat eu ex et, bibendum imperdiet leo. Sed interdum turpis
+        nec semper gravida. Proin tincidunt turpis ut purus varius, id rhoncus turpis aliquam. Pellentesque rutrum, arcu
+        et accumsan dictum, dolor ex molestie augue, in tempor neque nisi quis nulla. In in tristique lectus. Nulla sit
+        amet pharetra ex, et sodales arcu. Nunc rhoncus pellentesque nisi, in accumsan eros fermentum sed. Vestibulum
+        ullamcorper dui a arcu rutrum, eget pellentesque magna convallis. Nam a eleifend mi, sit amet sagittis velit.
+        Nulla at tellus quam.</p>
+        <p>Fusce a lectus eget dui malesuada iaculis pretium vitae sem. Quisque nec pretium nisl. Sed blandit, ipsum sit
+        amet sagittis volutpat, arcu velit pharetra felis, ac sollicitudin neque ex a tellus. Nam consectetur dui eu
+        pulvinar fringilla. Nulla convallis leo nec quam efficitur consequat. Vivamus tempus pretium risus sit amet
+        euismod. Suspendisse mollis lobortis posuere. Nunc ut leo gravida risus dapibus hendrerit. Aliquam congue
+        egestas facilisis. Sed sodales dui malesuada, convallis arcu imperdiet, molestie massa. Nullam placerat mauris
+        eu lectus bibendum tristique. Etiam orci orci, cursus feugiat mi quis, egestas hendrerit mi.</p>
     </div>
 </div>
 {% endblock %}

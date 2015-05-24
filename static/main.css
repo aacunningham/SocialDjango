@@ -1,5 +1,5 @@
 body{
-    padding-top: 20px;
+    padding-top: 40px;
 }
 
 .jumbotron h1{
@@ -72,4 +72,22 @@ a.btn.btn-primary {
 
 .post-style h3{
     margin-top: 10px;
+}
+
+.drop-button{
+    padding: 0px !important;
+}
+
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+.carousel-caption > p {
+    color: #000000;
+    text-shadow: 2px 2px 4px #FFFFFF;
+}
+
+.carousel-caption > h3 {
+    color: #000000;
+    text-shadow: 2px 2px 4px #FFFFFF;
 }

@@ -15,7 +15,7 @@
         {% if query %}
             <h3>Results</h3>
             {% for result in page.object_list %}
-            <p>{{ result.object.get_full_name }}</p>
+            <a href="{% url 'profile' result.object.id %}"><p>{{ result.object.get_full_name }}</p></a>
             <p>{{ result.object.email }}</p>
             {% empty %}
             <p>No results found.</p>

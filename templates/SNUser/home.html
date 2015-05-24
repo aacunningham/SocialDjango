@@ -23,11 +23,24 @@
 {% block body_block %}
 <h1>{{ user.get_full_name }}</h1>
 {% if user.profile_image %}
-<img src="{{ user.profile_image.url }}" style="max-width:100px;max-heigth:100px;">
+<img src="{{ user.profile_image.url }}" style="max-width:100px;max-height:100px;">
 {% endif %}
 <div class="row">
     <div class="row space-10"></div>
-    <div id="post_column" class="col-xs-5 col-xs-offset-1">
+    <div class="col-md-4 col-md-offset-1 col-md-push-6">
+        <form id="post_form" action="{% url 'create_post' %}" method="POST">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% bootstrap_form_errors form %}
+            {% bootstrap_field form.body layout='inline' %}
+            {% buttons %}
+            <button class="btn btn-primary" type="submit">Post!</button>
+            {% endbuttons %}
+        </form>
+    </div>
+    <div id="post_column" class="col-md-5 col-md-offset-1 col-md-pull-5">
         {% if posts %}
         {% for post in posts %}
         <div class="panel panel-primary posts" id="post{{ post.id }}">
@@ -44,19 +57,6 @@
         {% else %}
         <p>There are no posts related to yours.</p>
         {% endif %}
-    </div>
-    <div class="col-xs-4 col-xs-offset-1">
-        <form id="post_form" action="{% url 'create_post' %}" method="POST">
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% bootstrap_form_errors form %}
-            {% bootstrap_field form.body layout='inline' %}
-            {% buttons %}
-            <button class="btn btn-primary" type="submit">Post!</button>
-            {% endbuttons %}
-        </form>
     </div>
 </div>
 {% endblock %}
@@ -86,6 +86,7 @@ $('#post_form').on('submit', function(event){
             $('#post_column').html("");
         }
         $(data).hide().prependTo('#post_column').slideDown("slow");
+        document.getElementById("id_body").value = '';
         });
     });
 </script>
